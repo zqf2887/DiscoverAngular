@@ -1,0 +1,56 @@
+<!doctype html>
+<html id="ng-app" ng-app="checkoutApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>My Checkout</title>
+	
+	<script type="text/javascript" src="./res/js/lib/angular.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./res/css/checkout.css">
+	<link rel="stylesheet" type="text/css" href="./res/css/style.css">	
+</head>
+
+<body>
+	<header></header>
+	<main ng-controller="ModuleController">
+		<div class="module-section">
+			<section class="module-header" ng-show="isInitial()">
+				<span class="module-icon"></span>
+				<span class="module-main" ng-click="open()">
+					<h2>{{module.title}}</h2>
+				</span>
+			</section>
+			<section class="module-content" ng-show="isOpen() || isEdit()">
+				<span class="module-icon inline-block"></span>
+				<span class="module-main inline-block">
+					<p>{{module.header}}</p>
+					<div class="label-input-row">
+						<label for="first_name">First name</label>
+						<input type="text" id="first_name" name="firstName" ng-model="formData.firstName"/>
+					</div>
+					<div class="label-input-row">
+						<label for="last_name">Last name</label>
+						<input type="text" id="last_name" name="lastName" ng-model="formData.lastName"/>
+					</div>
+					<button ng-click="save(formData)">Save</button>
+					<button ng-click="cancel()" ng-show="isEdit()">Cancel</button>
+				</span>
+			</section>
+			<section class="module-summary" ng-show="isSaved()">
+				<span class="module-icon inline-block">
+					<a href="#" ng-click="edit()">Edit</a>
+				</span>
+				<span class="module-main inline-block">
+					<p>Your name details</p>
+					<div>{{formData.firstName}} {{formData.lastName}}</div>
+				</span>
+				
+			</section>
+		</div>
+	</main>
+	<footer></footer>
+	<script type="text/javascript" src="./res/js/checkout.js"></script>
+</body>
+
+</html>
