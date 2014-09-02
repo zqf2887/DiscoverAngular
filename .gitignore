@@ -1,4 +1,6 @@
-# exclude eclipse related files
+# exclude IDE related files
 .classpath
 .project
 .settings/*
+.idea/*
+*.iml
