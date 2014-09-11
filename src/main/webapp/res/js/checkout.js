@@ -7,18 +7,25 @@ checkoutApp.value('moduleStatus', {
 	SAVED: "complete"
 });
 
+checkoutApp.directive('nameDetailsModule', function(){
+    return {
+        restrict: 'A',
+        templateUrl: './name-details.html'
+    };
+});
 
 checkoutApp.controller('ModuleController',['$scope', 'moduleStatus', function($scope, moduleStatus){
 	$scope.currentStatus = moduleStatus.INITIAL;
-	
-	$scope.module = {
-		title: "Name Details",
-		header: "Please enter your name and date of birth",	
-	};
-	
+
 	$scope.formData = {};
 	$scope.master = {};
-	
+
+	$scope.module = {
+		title: "Name Details",
+		header: "Please enter your name and date of birth",
+		summaryHeader: "Your name details"
+	};
+
 	$scope.isInitial = function(){
 		return $scope.currentStatus === moduleStatus.INITIAL;
 		//return false;
