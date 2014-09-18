@@ -1,4 +1,4 @@
-angular.module('checkout.controller',[])
+angular.module('module.controller',[])
 .controller('ModuleController',['$scope', 'moduleStatus', function($scope, moduleStatus){
 	$scope.currentStatus = moduleStatus.INITIAL;
 

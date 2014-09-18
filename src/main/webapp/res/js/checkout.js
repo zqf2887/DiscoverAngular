@@ -1,4 +1,4 @@
-var checkoutApp = angular.module('checkoutApp', ['checkout.controller']);
+var checkoutApp = angular.module('checkoutApp', ['module.controller']);
 
 checkoutApp.value('moduleStatus', {
 	INITIAL: "initial",
@@ -7,11 +7,22 @@ checkoutApp.value('moduleStatus', {
 	SAVED: "complete"
 });
 
-checkoutApp.directive('nameDetailsModule', function(){
+checkoutApp.directive('checkoutModule', function(){
     return {
         restrict: 'A',
-        templateUrl: './name-details.html'
+        templateUrl: function(scope,attr){
+//            console.log(attr.moduleName);
+            return './'+ attr.moduleName +'.html';
+        }
     };
 });
 
+checkoutApp.controller('CheckoutController',['$scope', function($scope){
+
+	$scope.moduleNames = [{
+		title: "Name Details",
+		header: "Please enter your name and date of birth",
+		summaryHeader: "Your name details"
+	}];
+}]);
 
