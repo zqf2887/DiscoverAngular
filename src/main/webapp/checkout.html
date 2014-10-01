@@ -16,8 +16,10 @@
 
 <body>
 	<div class="header"></div>
-	<div class="main">
-		<div checkout-module module-name="name-details"/>
+	<div class="main" ng-controller="CheckoutController" ng-init="open()">
+        <div ng-repeat="module in modules">
+		    <div ng-include="module.moduleName+'.html'"/>
+        </div>
 	</div>
 	<div class="footer"></div>
 

@@ -1,51 +1,53 @@
 angular.module('module.controller',[])
 .controller('ModuleController',['$scope', 'moduleStatus', function($scope, moduleStatus){
-	$scope.currentStatus = moduleStatus.INITIAL;
+//	$scope.currentStatus = moduleStatus.INITIAL;
 
 	$scope.formData = {};
 	$scope.master = {};
 
-	$scope.module = {
-		title: "Name Details",
-		header: "Please enter your name and date of birth",
-		summaryHeader: "Your name details"
-	};
+    $scope.setIndex = function(index){
+        $scope.index = index;
+    };
 
 	$scope.isInitial = function(){
-		return $scope.currentStatus === moduleStatus.INITIAL;
-		//return false;
+		var m = $scope.getModuleByIndex($scope.index);
+		return m.currentStatus === moduleStatus.INITIAL;
 	};
 
 	$scope.isOpen = function(){
-		return $scope.currentStatus === moduleStatus.OPEN;
+		var m = $scope.getModuleByIndex($scope.index);
+		return m.currentStatus == moduleStatus.OPEN;
 	};
 
 	$scope.isEdit = function(){
-		return $scope.currentStatus === moduleStatus.EDIT;
+	    var m = $scope.getModuleByIndex($scope.index);
+		return m.currentStatus === moduleStatus.EDIT;
 		//return true;
 	};
 
 	$scope.isSaved = function(){
-		return $scope.currentStatus === moduleStatus.SAVED;
+	    var m = $scope.getModuleByIndex($scope.index);
+		return m.currentStatus === moduleStatus.SAVED;
 		//return false;
-	};
-
-	$scope.open = function() {
-		$scope.currentStatus = moduleStatus.OPEN;
 	};
 
 	$scope.save = function(formData) {
 		$scope.master = angular.copy(formData);
-		$scope.currentStatus = moduleStatus.SAVED;
+		var m = $scope.getModuleByIndex($scope.index);
+		m.currentStatus = moduleStatus.SAVED;
+		$scope.moveToNextModule();
 	};
 
 	$scope.edit = function() {
-		$scope.currentStatus = moduleStatus.EDIT;
+	    var m = $scope.getModuleByIndex($scope.index);
+		m.currentStatus = moduleStatus.EDIT;
+		$scope.updateModuleIndex($scope.index);
 	};
 
 	$scope.cancel = function() {
 		$scope.formData = angular.copy($scope.master);
-		$scope.currentStatus = moduleStatus.SAVED;
+		var m = $scope.getModuleByIndex($scope.index);
+		m.currentStatus = moduleStatus.SAVED;
 	};
 
 }]);
